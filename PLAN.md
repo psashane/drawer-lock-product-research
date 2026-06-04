@@ -102,6 +102,7 @@ Already in `CLAUDE.md`. Restating for visibility:
 - Cite every factual claim with a URL.
 - Distinguish opinion from fact when summarizing reviews/forums.
 - Note disagreements between sources; don't average.
+- **Locksmith trade forums and communities** are a valuable experiential source for this project — covert drawer lock installation is an advanced locksmith concept. Sources to check: Locksmith Ledger, ALOA (Associated Locksmiths of America) forums, Reddit r/Locksmith, and any trade-specific bulletin boards. Use for installation experience and product reliability signal, not specs.
 
 ## Sequencing and milestones
 

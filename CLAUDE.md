@@ -13,10 +13,12 @@ This repo is a structured research project to select and implement electronic lo
   - Drawer 1 (upper): 30" W × 6-7/8" H × 15-5/16" D (box); opening is 16" deep → ~11/16" rear clearance
   - Drawer 2 (lower): 30" W × 11-7/8" H × 15-5/16" D (box); same rear clearance
 - Construction: Flat-front frameless closet system, matte light gray finish, brushed nickel bar-pull handles centered on each face. Full-extension side-mount ball-bearing slides. Drawer faces have extremely tight gaps between them — no visible hardware gaps to exploit.
-- Mechanism geometry: Two viable configurations have been identified and are both feasible:
+- Mechanism geometry: Three viable configurations identified:
   1. **Mechanism-on-wall:** Solenoid/catch mounts to the rear wall; a pin on the back of the drawer box is caught when the drawer closes and released electronically.
-  2. **Mechanism-in-drawer:** A static pin mounts to the rear wall; the solenoid/latch lives inside the drawer box and grabs or releases the pin through a hole drilled in the drawer's back panel.
-  Both work within the ~11/16" rear clearance — the rear-wall component in either case is shallow. Research should surface which configuration is more common in available products.
+  2. **Mechanism-in-drawer (rear-engaging):** A static pin mounts to the rear wall; the solenoid/latch lives inside the drawer box and grabs or releases the pin through a hole drilled in the drawer's back panel.
+  3. **Mechanism-in-drawer (top-engaging):** A "tongue upward" solenoid mounts inside the drawer box at the rear — keeping all wiring at the back, out of sight. When locked, the bolt extends upward into a strike plate screwed to the underside of the divider shelf above. Divider shelves are confirmed 3/4" (19mm) thick melamine — sufficient for a flush strike plate without punching through. No rear wall work required for this configuration.
+  Rear clearance is not a fixed constraint for Configs 1 and 2 — sheetrock can be removed and 2×4 blocking installed between studs, creating a recessed mounting surface at whatever depth is needed (up to 1-3/8" achievable). Config 3 requires no rear clearance at all.
+- **Frameless construction — no face frame:** This is a frameless closet system. There is no 90° face frame lip at the front of the drawer opening. Any locking mechanism that relies on catching a face frame lip is incompatible. Engagement must be against a flat surface — strike plate on divider underside (Config 3), rear wall pin (Configs 1 and 2), or equivalent flat-surface engagement.
 - Access sensor placement: Fingerprint reader(s) mounted to the right side panel of the cabinet — low-profile, screwed in place, cabled to the mechanism. Two readers (one per drawer, stacked vertically on the side panel). Unobtrusive: you reach around and touch your finger as you approach. This is a solved installation problem.
 - What's being stored: Treat as general high-value / sensitive items (firearms, documents, valuables, medications). Security bar is consistent across all categories: keep out children and casual thieves. Not hardening against determined forced entry. (WA State firearms secure storage law — RCW 9.41.360 — is satisfied by any solution that meets this bar.)
 
@@ -24,13 +26,16 @@ This repo is a structured research project to select and implement electronic lo
 - Must have a backup access method if primary electronic access fails — key override, backup battery, emergency PIN, or equivalent
 - Must appear as a completely normal drawer when locked (covert aesthetic — no visible locks, keypads, keyways, or hardware that signals "secure storage")
 - The drawer enclosure is four-sided: adjacent drawers above, below, and beside cannot be used to reach in and defeat the catch
-- Primary access must include at least one of: fingerprint reader, Bluetooth
+- Primary access must include a fingerprint reader. Bluetooth is a preference, not a hard requirement.
 
 **Strong preferences** (flag any candidate that doesn't meet these, but don't auto-disqualify):
 - 120V AC power is available — battery-only solutions acceptable but powered or hybrid solutions preferred
-- Multiple independent access methods per drawer — priority order: (1) fingerprint reader, (2) Bluetooth/app, (3) backup key or PIN
+- Multiple independent access methods per drawer — priority order: (1) fingerprint — frictionless, no phone required; (2) keypad/PIN — fast fallback if fingerprint fails, can be built into the same unit as the fingerprint sensor; (3) RFID card/fob; (4) Bluetooth/app — lowest priority, requires phone. Products combining fingerprint + keypad in one unit are preferred since they cover the top two methods in a single device.
+- **Fail-secure required AND battery warning required:** Lock must stay locked when battery dies (fail-secure). However, a 48-hour low-battery warning is insufficient if the owner is traveling — a dead battery during a trip means no access until return. Hardwired power (preferred) eliminates this entirely. For battery-only products, prefer those with long battery life (12+ months) and early warning. USB emergency power port is acceptable as a last-resort backup.
 - Clean integration with the closet system aesthetic (no visible external hardware on the drawer face or surrounding panels)
 - Vendor stability: strong preference for products from companies with demonstrated longevity and active software support — this is a cloud/app-dependent product category where a vendor going dark means the lock may stop working
+- **Country of origin preference (ranked):** (1) US-owned and operated; (2) Canada; (3) Taiwan; (4) other countries; (5) China — Chinese brands carry the highest risk of app/server abandonment, poor long-term support, and no recourse if the product fails. Anonymous Amazon/Alibaba brands with no verifiable company identity are disqualified regardless of country.
+- **Backup access:** Physical key override is preferred but Micro USB emergency power port is acceptable — it serves the same purpose (access when battery is dead) without requiring a keyhole. A product with a USB backup port is almost certainly fail-secure: a fail-safe lock would have no need for emergency power since it would already be open.
 
 The distinction matters: constraints that feel hard during Scoping sometimes turn out to be preferences once we understand the tradeoffs. If you push back on a constraint, we'll revisit whether it belongs in the hard or preference list rather than just keeping it where it started.
 
