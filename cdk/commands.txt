@@ -1,0 +1,57 @@
+Commands to deploy cdk/app.py (WestBucketStack + EastBucketStack)
+==================================================================
+
+Assumes: Python venv active with CDK deps, AWS credentials already
+exported in the shell (AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY, or
+equivalent), and that you are running these from inside the cdk/
+directory (`cd cdk`).
+
+Prerequisite (one-time, not a deploy step):
+  Edit app.py and change NAME_PREFIX = "change-me" to something you
+  control. S3 bucket names are globally unique across all of AWS, so
+  the default value will collide with someone else's bucket and fail.
+
+0. Confirm the CDK CLI is available (it's Node.js-based even for a
+   Python app -- your venv provides aws-cdk-lib, not the `cdk` binary
+   itself):
+   cdk --version
+
+1. Install/refresh the Python CDK dependencies into the active venv:
+   pip install -r requirements.txt
+
+2. Bootstrap both target regions in this account (one-time per
+   account+region; safe to re-run, it's idempotent):
+   cdk bootstrap aws://$(aws sts get-caller-identity --query Account --output text)/us-west-2
+   cdk bootstrap aws://$(aws sts get-caller-identity --query Account --output text)/us-east-1
+
+3. Synthesize both stacks to CloudFormation and check for errors:
+   cdk synth --all
+
+4. Review what will change (optional but recommended before first
+   deploy):
+   cdk diff --all
+
+5. Deploy both stacks. Each stack creates an IAM role for replication,
+   so CDK will prompt to approve security-related changes for each
+   stack unless you pass --require-approval never:
+   cdk deploy --all
+
+   (Non-interactive alternative:)
+   cdk deploy --all --require-approval never
+
+6. Verify replication configuration landed on both buckets:
+   aws s3api get-bucket-replication --bucket <west-bucket-name> --region us-west-2
+   aws s3api get-bucket-replication --bucket <east-bucket-name> --region us-east-1
+
+7. Functional test -- put an object in one bucket and confirm it
+   shows up in the other (replication is asynchronous, allow a minute
+   or two):
+   aws s3 cp ./some-file.txt s3://<west-bucket-name>/ --region us-west-2
+   aws s3 ls s3://<east-bucket-name>/ --region us-east-1
+
+Teardown (not requested, included for completeness):
+  Both buckets are created with RemovalPolicy.RETAIN, so `cdk destroy`
+  removes the stacks/IAM roles but leaves the buckets and their data
+  behind -- delete those manually via the console or `aws s3 rb
+  --force` if you actually want them gone.
+  cdk destroy --all
